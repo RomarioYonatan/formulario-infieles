@@ -1,1 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FORMULARIO DE REGISTRO DE INFIELES</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .required {
+            color: #e74c3c;
+            margin-left: 3px;
+        }
+
+        .optional {
+            color: #95a5a6;
+            font-weight: normal;
+            font-size: 12px;
+            margin-left: 5px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 600px) {
+            .row {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📋 FORMULARIO DE REGISTRO DE INFIELES</h1>
+        
+        <div id="message" class="message"></div>
+        
+        <form id="registroForm">
+            <div class="row">
+                <div class="form-group">
+                    <label for="nombres">Nombres <span class="required">*</span></label>
+                    <input type="text" id="nombres" name="nombres" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="apellidos">Apellidos <span class="required">*</span></label>
+                    <input type="text" id="apellidos" name="apellidos" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="edad">Edad <span class="required">*</span></label>
+                <input type="number" id="edad" name="edad" min="1" max="120" required>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <label for="ciudad">Ciudad <span class="required">*</span></label>
+                    <input type="text" id="ciudad" name="ciudad" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="distrito">Distrito <span class="required">*</span></label>
+                    <input type="text" id="distrito" name="distrito" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="motivo">Motivo de Infidelidad <span class="required">*</span></label>
+                <textarea id="motivo" name="motivo" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="redes">Redes Sociales <span class="optional">(opcional)</span></label>
+                <input type="text" id="redes" name="redes" placeholder="Facebook, Instagram, etc.">
+            </div>
+
+            <div class="form-group">
+                <label for="evidencia">Evidencia <span class="optional">(opcional)</span></label>
+                <textarea id="evidencia" name="evidencia" placeholder="Describe cualquier evidencia disponible"></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">Enviar Registro</button>
+        </form>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p style="margin-top: 15px; color: #666;">Enviando datos...</p>
+        </div>
+
+        <div style="margin-top: 25px; text-align: center;">
+            <a href="https://docs.google.com/spreadsheets/d/1ULYc6TPaWKprX3P8su0OZpUixAPYpqZTHsU4lNlnZEU/edit?usp=sharing" 
+               target="_blank" 
+               style="display: inline-block; padding: 12px 30px; background: #34a853; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(52, 168, 83, 0.3);">
+                📊 Ver Registros de infieles
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // AQUÍ DEBES COLOCAR LA URL DE TU GOOGLE APPS SCRIPT
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyLVrLCyhIa5CLE4nT6yZ8QoQSzAd0_U6oFG64uuFu78LFH_Wb3TB0rd7X03IJidi8k2A/exec';
+
+        const form = document.getElementById('registroForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const loading = document.getElementById('loading');
+        const messageDiv = document.getElementById('message');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Validar que se haya configurado la URL del script
+            if (SCRIPT_URL === 'TU_URL_DE_SCRIPT_AQUI') {
+                showMessage('Por favor, configura la URL del Google Apps Script en el código.', 'error');
+                return;
+            }
+
+            // Recopilar datos del formulario
+            const formData = {
+                nombres: document.getElementById('nombres').value.trim(),
+                apellidos: document.getElementById('apellidos').value.trim(),
+                edad: document.getElementById('edad').value,
+                ciudad: document.getElementById('ciudad').value.trim(),
+                distrito: document.getElementById('distrito').value.trim(),
+                motivo: document.getElementById('motivo').value.trim(),
+                redes: document.getElementById('redes').value.trim(),
+                evidencia: document.getElementById('evidencia').value.trim(),
+                fecha: new Date().toLocaleString('es-PE')
+            };
+
+            // Mostrar loading
+            submitBtn.disabled = true;
+            loading.style.display = 'block';
+            messageDiv.style.display = 'none';
+
+            try {
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                // Nota: con mode 'no-cors' no podemos leer la respuesta,
+                // pero el dato sí se envía correctamente
+                showMessage('✅ Registro enviado exitosamente', 'success');
+                form.reset();
+
+            } catch (error) {
+                console.error('Error:', error);
+                showMessage('❌ Hubo un error al enviar el registro. Por favor, intenta nuevamente.', 'error');
+            } finally {
+                submitBtn.disabled = false;
+                loading.style.display = 'none';
+            }
+        });
+
+        function showMessage(text, type) {
+            messageDiv.textContent = text;
+            messageDiv.className = `message ${type}`;
+            messageDiv.style.display = 'block';
+
+            if (type === 'success') {
+                setTimeout(() => {
+                    messageDiv.style.display = 'none';
+                }, 5000);
+            }
+        }
+    </script>
+</body>
+</html>
 
